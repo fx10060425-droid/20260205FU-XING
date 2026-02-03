@@ -79,12 +79,12 @@
                 <div class="h-10 w-px bg-red-200 hidden md:block"></div>
                 <div>
                     <p class="text-red-400 text-sm font-bold">總名額</p>
-                    <p class="text-3xl font-black text-red-700">224 名</p>
+                    <p class="text-3xl font-black text-red-700">200 名</p>
                 </div>
                 <div class="h-10 w-px bg-red-200 hidden md:block"></div>
                 <div>
                     <p class="text-red-400 text-sm font-bold">目前輪次</p>
-                    <p class="text-3xl font-black text-red-700">人人有獎</p>
+                    <p class="text-3xl font-black text-red-700">人人有獎，請中獎人至人事室領取</p>
                 </div>
             </div>
 
@@ -99,12 +99,12 @@
             <div class="bg-orange-50 border-2 border-orange-100 rounded-2xl p-6 flex flex-wrap justify-around items-center text-center gap-4">
                 <div>
                     <p class="text-orange-400 text-sm font-bold">獎項類備</p>
-                    <p class="text-3xl font-black text-orange-700">11 類</p>
+                    <p class="text-3xl font-black text-orange-700">14 類</p>
                 </div>
                 <div class="h-10 w-px bg-orange-200 hidden md:block"></div>
                 <div>
                     <p class="text-orange-400 text-sm font-bold">總名額</p>
-                    <p class="text-3xl font-black text-orange-700">24 名</p>
+                    <p class="text-3xl font-black text-orange-700">30 名</p>
                 </div>
                 <div class="h-10 w-px bg-orange-200 hidden md:block"></div>
                 <div>
@@ -134,11 +134,11 @@
 
     <script>
         const round1Data = [
-            { name: "歌本哈歌質感保溫瓶", count: 53, icon: "fa-faucet-drip", color: "pink", cat: "生活" },
+            { name: "歌本哈根質感保溫瓶", count: 53, icon: "fa-faucet-drip", color: "pink", cat: "生活" },
             { name: "TWS 藍芽無線耳機", count: 38, icon: "fa-headphones", color: "pink", cat: "科技" },
             { name: "台製舒壓吹風機", count: 20, icon: "fa-wind", color: "pink", cat: "生活" },
             { name: "法蘭絨暖暖毯", count: 20, icon: "fa-blanket", color: "pink", cat: "生活" },
-            { name: "不鏽鋼質感電茶壺", count: 20, icon: "fa-mug-hot", color: "pink", cat: "廚房" },
+            { name: "不鏽鋼電茶壺", count: 20, icon: "fa-mug-hot", color: "pink", cat: "廚房" },
             { name: "法蘭絨印畫休閒毯", count: 16, icon: "fa-couch", color: "pink", cat: "生活" },
             { name: "溫馨護眼 LED 檯燈", count: 10, icon: "fa-lightbulb", color: "pink", cat: "生活" },
             { name: "5000mAh 口袋行動電源", count: 9, icon: "fa-battery-full", color: "pink", cat: "科技" },
@@ -147,7 +147,7 @@
             { name: "桃園精選好禮", count: 1, icon: "fa-award", color: "pink", cat: "在地" },
             { name: "露糜精品咖啡套裝", count: 1, icon: "fa-coffee", color: "pink", cat: "美食" },
             { name: "角板山梅子康普茶", count: 1, icon: "fa-leaf", color: "pink", cat: "在地" },
-            { name: "歲月好味禮盒", count: 1, icon: "fa-utensils", color: "pink", cat: "美食" },
+            { name: "歲月好味．馬上開吃禮盒", count: 1, icon: "fa-utensils", color: "pink", cat: "美食" },
             { name: "堅果樂園禮盒", count: 1, icon: "fa-seedling", color: "pink", cat: "美食" },
             { name: "菓韻蛇鼻禮盒", count: 1, icon: "fa-apple-whole", color: "pink", cat: "美食" },
             { name: "KIRI 獵人食坊驚喜", count: 1, icon: "fa-campground", color: "pink", cat: "在地" }
@@ -156,6 +156,7 @@
         const round2Data = [
             { name: "聲寶 50 吋超大電視", count: 1, icon: "fa-tv", color: "orange", cat: "旗艦" },
             { name: "Balzano 全自動磨豆咖啡機", count: 1, icon: "fa-coffee", color: "orange", cat: "旗艦" },
+            { name: "奇美手持多功能很有力吸塵器", count: 1, icon: "fa-coffee", color: "orange", cat: "旗艦" },
             { name: "1000 元幸運現金獎", count: 6, icon: "fa-money-bill-wave", color: "orange", cat: "好運" },
             { name: "紫外線三層烘碗機", count: 1, icon: "fa-soap", color: "orange", cat: "居家" },
             { name: "直立式烘碗機", count: 2, icon: "fa-wine-glass", color: "orange", cat: "居家" },
@@ -165,6 +166,8 @@
             { name: "台製 10 人不銹鋼電鍋", count: 2, icon: "fa-bowl-food", color: "orange", cat: "廚房" },
             { name: "10 人精緻電子鍋", count: 2, icon: "fa-bowl-rice", color: "orange", cat: "廚房" },
             { name: "16 吋變頻節能電扇", count: 2, icon: "fa-fan", color: "orange", cat: "居家" }
+            { name: "富士電通急速震動筋膜槍", count: ３, icon: "fa-fan", color: "orange", cat: "居家" }
+         　 { name: "鍋寶萬用不沾深炒鍋", count: ３, icon: "fa-cookie", color: "orange", cat: "居家" }
         ];
 
         function renderList(data, containerId, themeColor) {
@@ -221,3 +224,4 @@
 </body>
 
 </html>
+
