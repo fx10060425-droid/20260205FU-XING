@@ -3,225 +3,260 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🏮 復興區公所 2026 年新春尾牙獎項展示 🏮</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>✨ 幸運大抽獎（左右並排版） ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@300;500&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-pink: #FFB7B2;
+            --soft-yellow: #FFFFD1;
+            --mint-green: #E2F0CB;
+            --text-color: #6d5c5c;
+            --card-bg: #ffffff;
+            --grand-gold: #FFD700;
+        }
+
         body {
-            font-family: 'Noto Sans TC', sans-serif;
-            background-color: #fff5f5;
+            background: linear-gradient(135deg, #FFF5F5 0%, #FFF0F5 100%);
+            font-family: 'Kiwi Maru', 'Noto Sans TC', sans-serif;
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            height: 100vh;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
         }
-        .prize-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            flex-shrink: 0;
         }
-        .prize-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+        h1 {
+            color: #FF6F61;
+            font-size: 2rem;
+            margin: 0 0 5px 0;
+            text-shadow: 2px 2px 0px #fff;
         }
-        .tab-active {
-            background-color: #dc2626;
+
+        .subtitle {
+            font-size: 1rem;
+            color: #888;
+            margin: 0;
+        }
+
+        /* 主要容器：改為 Flex 左右排版 */
+        .container {
+            display: flex;
+            gap: 20px;
+            max-width: 1400px; /* 加寬寬度以容納左右兩欄 */
+            margin: 0 auto;
+            flex-grow: 1;
+            align-items: stretch; /* 讓兩欄等高 */
+            width: 100%;
+        }
+
+        /* 每一輪的區塊 */
+        .round-section {
+            flex: 1; /* 左右各佔 50% */
+            background-color: rgba(255, 255, 255, 0.6);
+            border: 4px dashed var(--primary-pink);
+            border-radius: 30px;
+            padding: 40px 20px 20px 20px; /* 上方留多一點給標題 */
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto; /* 如果內容太多，區塊內可以捲動 */
+            max-height: calc(100vh - 150px); /* 限制高度，避免超出視窗 */
+        }
+
+        /* 捲軸美化 */
+        .round-section::-webkit-scrollbar {
+            width: 8px;
+        }
+        .round-section::-webkit-scrollbar-track {
+            background: #fff0f5; 
+            border-radius: 10px;
+        }
+        .round-section::-webkit-scrollbar-thumb {
+            background: #ffb7b2; 
+            border-radius: 10px;
+        }
+
+        .round-title {
+            background-color: var(--primary-pink);
             color: white;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 8px 25px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            white-space: nowrap;
+            z-index: 10;
         }
-        .bg-festive {
-            background-image: radial-gradient(#fee2e2 1px, transparent 1px);
-            background-size: 20px 20px;
+
+        .round-note {
+            text-align: center;
+            color: #ff8ba7;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            flex-shrink: 0;
         }
-        @keyframes float {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(2deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
+
+        /* 獎品網格 */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* 卡片稍微縮小一點以塞入更多 */
+            gap: 15px;
+            padding-bottom: 10px;
         }
-        .animate-float {
-            animation: float 4s ease-in-out infinite;
+
+        .prize-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 15px 10px;
+            box-shadow: 0 3px 10px rgba(255, 183, 178, 0.2);
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid transparent;
+            cursor: pointer; /* 讓游標變成手指 */
+            position: relative;
+        }
+
+        .prize-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--mint-green);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .prize-card:active {
+            transform: scale(0.95); /* 點擊時縮小效果 */
+        }
+
+        .icon {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .prize-name {
+            font-size: 0.95rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            line-height: 1.3;
+            text-align: center;
+        }
+
+        .prize-badge {
+            background-color: var(--soft-yellow);
+            color: #eda045;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        /* 第二輪大獎特別樣式 */
+        .grand-prize {
+            background: linear-gradient(to bottom, #fff, #fff9e6);
+            border: 2px solid var(--grand-gold);
+        }
+        
+        .grand-prize .prize-name {
+            color: #d4af37;
+        }
+
+        .grand-prize .prize-badge {
+            background-color: var(--grand-gold);
+            color: white;
+        }
+
+        /* 手機版適配：螢幕太窄時自動變回上下排列 */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                height: auto;
+            }
+            .round-section {
+                max-height: none;
+                margin-bottom: 30px;
+            }
+            .round-title {
+                top: -20px;
+            }
+            body {
+                height: auto;
+            }
         }
     </style>
 </head>
-<body class="bg-festive min-h-screen">
+<body>
 
-    <!-- Header Section -->
-    <header class="bg-red-600 text-white py-12 shadow-lg relative overflow-hidden">
-        <div class="absolute top-0 left-0 p-4 animate-bounce">🏮</div>
-        <div class="absolute top-0 right-0 p-4 animate-bounce">🏮</div>
-        <div class="container mx-auto text-center px-4">
-            <div class="inline-block bg-white text-red-600 px-6 py-1 rounded-full text-sm font-black mb-4 tracking-widest uppercase">
-                2026 New Year Party
-            </div>
-            <h1 class="text-4xl md:text-6xl font-black mb-4">復興區公所 2026 年新春尾牙</h1>
-            <p class="text-xl md:text-2xl text-red-100 font-bold">🧧 福旺全區．好運連連獎項展示 🧧</p>
-        </div>
+    <header>
+        <h1>🎈 歡樂尾牙大抽獎 🎈</h1>
+        <p class="subtitle">點擊獎品卡片可查看詳情（模擬）</p>
     </header>
 
-    <!-- Main Content -->
-    <main class="container mx-auto py-12 px-4 max-w-6xl">
+    <div class="container">
         
-        <!-- Navigation Tabs -->
-        <div class="flex justify-center mb-12">
-            <div class="bg-white p-2 rounded-2xl shadow-md flex gap-2">
-                <button onclick="switchTab(1)" id="btn-tab-1" class="tab-active px-8 py-3 rounded-xl font-black text-lg transition-all duration-300">
-                    <i class="fas fa-gift mr-2"></i> 第一輪：普天同慶
-                </button>
-                <button onclick="switchTab(2)" id="btn-tab-2" class="px-8 py-3 rounded-xl font-black text-lg text-gray-500 hover:bg-gray-100 transition-all duration-300">
-                    <i class="fas fa-crown mr-2"></i> 第二輪：現場大獎
-                </button>
-            </div>
-        </div>
-
-        <!-- Section: Round 1 -->
-        <div id="round-1" class="space-y-12">
-            <!-- Stats Bar -->
-            <div class="bg-red-50 border-2 border-red-100 rounded-2xl p-6 flex flex-wrap justify-around items-center text-center gap-4">
-                <div>
-                    <p class="text-red-400 text-sm font-bold">獎項類別</p>
-                    <p class="text-3xl font-black text-red-700">17 類</p>
-                </div>
-                <div class="h-10 w-px bg-red-200 hidden md:block"></div>
-                <div>
-                    <p class="text-red-400 text-sm font-bold">總名額</p>
-                    <p class="text-3xl font-black text-red-700">200 名</p>
-                </div>
-                <div class="h-10 w-px bg-red-200 hidden md:block"></div>
-                <div>
-                    <p class="text-red-400 text-sm font-bold">目前輪次</p>
-                    <p class="text-3xl font-black text-red-700">人人有獎，請中獎人至人事室領取</p>
-                </div>
-            </div>
-
-            <!-- Prize Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="round-1-list">
-                <!-- Items will be injected here -->
-            </div>
-        </div>
-
-        <!-- Section: Round 2 (Hidden initially) -->
-        <div id="round-2" class="hidden space-y-12">
-            <div class="bg-orange-50 border-2 border-orange-100 rounded-2xl p-6 flex flex-wrap justify-around items-center text-center gap-4">
-                <div>
-                    <p class="text-orange-400 text-sm font-bold">獎項類備</p>
-                    <p class="text-3xl font-black text-orange-700">14 類</p>
-                </div>
-                <div class="h-10 w-px bg-orange-200 hidden md:block"></div>
-                <div>
-                    <p class="text-orange-400 text-sm font-bold">總名額</p>
-                    <p class="text-3xl font-black text-orange-700">30 名</p>
-                </div>
-                <div class="h-10 w-px bg-orange-200 hidden md:block"></div>
-                <div>
-                    <p class="text-orange-400 text-sm font-bold">目前輪次</p>
-                    <p class="text-3xl font-black text-orange-700">現場大獎</p>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="round-2-list">
-                <!-- Items will be injected here -->
-            </div>
-        </div>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-white border-t border-gray-200 py-12 mt-12">
-        <div class="container mx-auto text-center px-4">
-            <div class="flex justify-center gap-6 mb-6">
-                <i class="fas fa-heart text-red-500 text-2xl animate-pulse"></i>
-                <i class="fas fa-star text-yellow-500 text-2xl animate-bounce"></i>
-                <i class="fas fa-heart text-red-500 text-2xl animate-pulse"></i>
-            </div>
-            <p class="text-gray-400 font-bold tracking-widest uppercase">✨ 祝 復興區公所全體同仁 新春快樂 人事室製 ✨</p>
-        </div>
-    </footer>
-
-    <script>
-        const round1Data = [
-            { name: "歌本哈根質感保溫瓶", count: 53, icon: "fa-faucet-drip", color: "pink", cat: "生活" },
-            { name: "TWS 藍芽無線耳機", count: 38, icon: "fa-headphones", color: "pink", cat: "科技" },
-            { name: "台製舒壓吹風機", count: 20, icon: "fa-wind", color: "pink", cat: "生活" },
-            { name: "法蘭絨暖暖毯", count: 20, icon: "fa-blanket", color: "pink", cat: "生活" },
-            { name: "不鏽鋼電茶壺", count: 20, icon: "fa-mug-hot", color: "pink", cat: "廚房" },
-            { name: "法蘭絨印畫休閒毯", count: 16, icon: "fa-couch", color: "pink", cat: "生活" },
-            { name: "溫馨護眼 LED 檯燈", count: 10, icon: "fa-lightbulb", color: "pink", cat: "生活" },
-            { name: "5000mAh 口袋行動電源", count: 9, icon: "fa-battery-full", color: "pink", cat: "科技" },
-            { name: "HYD 多功能不沾料理快煮鍋", count: 6, icon: "fa-bowl-rice", color: "pink", cat: "廚房" },
-            { name: "文青驚喜盲盒", count: 1, icon: "fa-box-open", color: "pink", cat: "驚喜" },
-            { name: "桃園精選好禮", count: 1, icon: "fa-award", color: "pink", cat: "在地" },
-            { name: "露糜精品咖啡套裝", count: 1, icon: "fa-coffee", color: "pink", cat: "美食" },
-            { name: "角板山梅子康普茶", count: 1, icon: "fa-leaf", color: "pink", cat: "在地" },
-            { name: "歲月好味．馬上開吃禮盒", count: 1, icon: "fa-utensils", color: "pink", cat: "美食" },
-            { name: "堅果樂園禮盒", count: 1, icon: "fa-seedling", color: "pink", cat: "美食" },
-            { name: "菓韻蛇鼻禮盒", count: 1, icon: "fa-apple-whole", color: "pink", cat: "美食" },
-            { name: "KIRI 獵人食坊驚喜", count: 1, icon: "fa-campground", color: "pink", cat: "在地" }
-        ];
-
-        const round2Data = [
-            { name: "聲寶 50 吋超大電視", count: 1, icon: "fa-tv", color: "orange", cat: "旗艦" },
-            { name: "Balzano 全自動磨豆咖啡機", count: 1, icon: "fa-coffee", color: "orange", cat: "旗艦" },
-            { name: "奇美手持多功能很有力吸塵器", count: 1, icon: "fa-coffee", color: "orange", cat: "旗艦" },
-            { name: "1000 元幸運現金獎", count: 6, icon: "fa-money-bill-wave", color: "orange", cat: "好運" },
-            { name: "紫外線三層烘碗機", count: 1, icon: "fa-soap", color: "orange", cat: "居家" },
-            { name: "直立式烘碗機", count: 2, icon: "fa-wine-glass", color: "orange", cat: "居家" },
-            { name: "歌林 20 公升電烤箱", count: 2, icon: "fa-bread-slice", color: "orange", cat: "廚房" },
-            { name: "歌林 10 公升雙旋鈕烤箱", count: 2, icon: "fa-hotdog", color: "orange", cat: "廚房" },
-            { name: "8 公升美味烤箱", count: 2, icon: "fa-cookie", color: "orange", cat: "廚房" },
-            { name: "台製 10 人不銹鋼電鍋", count: 2, icon: "fa-bowl-food", color: "orange", cat: "廚房" },
-            { name: "10 人精緻電子鍋", count: 2, icon: "fa-bowl-rice", color: "orange", cat: "廚房" },
-            { name: "16 吋變頻節能電扇", count: 2, icon: "fa-fan", color: "orange", cat: "居家" }
-            { name: "富士電通急速震動筋膜槍", count: ３, icon: "fa-fan", color: "orange", cat: "居家" }
-         　 { name: "鍋寶萬用不沾深炒鍋", count: ３, icon: "fa-cookie", color: "orange", cat: "居家" }
-        ];
-
-        function renderList(data, containerId, themeColor) {
-            const container = document.getElementById(containerId);
-            container.innerHTML = data.map(item => `
-                <div class="prize-card bg-white rounded-3xl p-8 flex flex-col justify-between border border-gray-100 shadow-sm relative overflow-hidden group">
-                    <div class="absolute -top-4 -right-4 w-24 h-24 bg-${themeColor}-50 rounded-full flex items-center justify-center transition-all group-hover:bg-${themeColor}-100">
-                        <i class="fas ${item.icon} text-${themeColor}-500 text-4xl group-hover:scale-110 transition-transform"></i>
-                    </div>
-                    <div class="mb-4">
-                        <span class="inline-block px-3 py-1 bg-${themeColor}-50 text-${themeColor}-600 rounded-full text-xs font-black mb-4 uppercase tracking-wider">
-                            ${item.cat}
-                        </span>
-                        <h3 class="text-2xl font-black text-gray-800 leading-tight group-hover:text-red-600 transition-colors">
-                            ${item.name}
-                        </h3>
-                    </div>
-                    <div class="flex items-baseline gap-2">
-                        <span class="text-4xl font-black text-${themeColor}-600">${item.count}</span>
-                        <span class="text-gray-400 font-bold uppercase text-sm">名額</span>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function switchTab(tabNum) {
-            // Update UI
-            document.getElementById('round-1').classList.toggle('hidden', tabNum !== 1);
-            document.getElementById('round-2').classList.toggle('hidden', tabNum !== 2);
+        <div class="round-section">
+            <div class="round-title">🌸 第一輪：普天同慶</div>
+            <span class="round-note">📍 貼心提醒：人人有獎，請至人事室領取</span>
             
-            // Update Buttons
-            const btn1 = document.getElementById('btn-tab-1');
-            const btn2 = document.getElementById('btn-tab-2');
-            
-            if (tabNum === 1) {
-                btn1.classList.add('tab-active');
-                btn1.classList.remove('text-gray-500');
-                btn2.classList.remove('tab-active');
-                btn2.classList.add('text-gray-500');
-            } else {
-                btn2.classList.add('tab-active');
-                btn2.classList.remove('text-gray-500');
-                btn1.classList.remove('tab-active');
-                btn1.classList.add('text-gray-500');
-            }
-        }
+            <div class="grid">
+                <div class="prize-card"><span class="icon">🍲</span><div class="prize-name">HYD多功能不沾<br>1公升料理快煮鍋</div><div class="prize-badge">6 名</div></div>
+                <div class="prize-card"><span class="icon">🔋</span><div class="prize-name">5000mAh<br>口袋行動電源</div><div class="prize-badge">9 名</div></div>
+                <div class="prize-card"><span class="icon">🛋️</span><div class="prize-name">法蘭絨<br>印畫休閒毯</div><div class="prize-badge">16 名</div></div>
+                <div class="prize-card"><span class="icon">🎧</span><div class="prize-name">TWS藍芽耳機</div><div class="prize-badge">38 名</div></div>
+                <div class="prize-card"><span class="icon">🎁</span><div class="prize-name">文青盲盒</div><div class="prize-badge">1 名</div></div>
+                <div class="prize-card"><span class="icon">🛍️</span><div class="prize-name">桃園好禮</div><div class="prize-badge">1 名</div></div>
+                <div class="prize-card"><span class="icon">☕</span><div class="prize-name">露糜咖啡套裝</div><div class="prize-badge">1 名</div></div>
+                <div class="prize-card"><span class="icon">🍵</span><div class="prize-name">角板梅子康普茶</div><div class="prize-badge">1 名</div></div>
+                <div class="prize-card"><span class="icon">🍪</span><div class="prize-name">歲月好味<br>馬上開吃</div><div class="prize-badge">1 名</div></div>
+                <div class="prize-card"><span class="icon">🥜</span><div class="prize-name">堅果樂園</div><div class="prize-badge">1 名</div></div>
+                <div class="prize-card"><span class="icon">🐍</span><div class="prize-name">果菓-菓韻<br>蛇鼻禮盒</div><div class="prize-badge">1 名</div></div>
+                <div class="prize-card"><span class="icon">🍖</span><div class="prize-name">KIRI獵人食坊</div><div class="prize-badge">1 名</div></div>
+                <div class="prize-card"><span class="icon">🥤</span><div class="prize-name">歌本哈根保溫瓶</div><div class="prize-badge">53 名</div></div>
+                <div class="prize-card"><span class="icon">🛌</span><div class="prize-name">法蘭絨毯</div><div class="prize-badge">20 名</div></div>
+                <div class="prize-card"><span class="icon">💨</span><div class="prize-name">台製吹風機</div><div class="prize-badge">20 名</div></div>
+                <div class="prize-card"><span class="icon">🫖</span><div class="prize-name">不鏽鋼電茶壺</div><div class="prize-badge">20 名</div></div>
+                <div class="prize-card"><span class="icon">💡</span><div class="prize-name">護眼檯燈</div><div class="prize-badge">10 名</div></div>
+                <div class="prize-card"><span class="icon">💖</span><div class="prize-name">暖心安慰獎</div><div class="prize-badge">60 名</div></div>
+            </div>
+        </div>
 
-        // Initialize
-        window.onload = () => {
-            renderList(round1Data, 'round-1-list', 'red');
-            renderList(round2Data, 'round-2-list', 'orange');
-        };
-    </script>
+        <div class="round-section">
+            <div class="round-title">💎 第二輪：現場大獎</div>
+            <span class="round-note">✨ 緊張刺激！現場抽出幸運兒 ✨</span>
+
+            <div class="grid">
+                <div class="prize-card grand-prize"><span class="icon">📺</span><div class="prize-name">聲寶50吋電視</div><div class="prize-badge">1 名</div></div>
+                <div class="prize-card grand-prize"><span class="icon">🧹</span><div class="prize-name">奇美手持多功能<br>很有力吸塵器</div><div class="prize-badge">1 名</div></div>
+                <div class="prize-card grand-prize"><span class="icon">🍽️</span><div class="prize-name">紫外線<br>三層烘碗機</div><div class="prize-badge">1 名</div></div>
+                <div class="prize-card grand-prize"><span class="icon">☕</span><div class="prize-name">Balzano<br>全自動磨豆咖啡機</div><div class="prize-badge">1 名</div></div>
+                
+                <div class="prize-card"><span class="icon">🍳</span><div class="prize-name">鍋寶萬用<br>不沾深炒鍋</div><div class="prize-badge">3 名</div></div>
+                <div class="prize-card"><span class="icon">💆</span><div class="prize-name">富士電通<br>急速震動筋膜槍</div><div class="prize-badge">3 名</div></div>
+                <div class="prize-card"><span class="icon">🔥</span><div class="prize-name">歌林10公升<br>雙旋鈕電烤箱</div><div class="prize-badge">2 名</div></div>
+                <div class="prize-card"><span class="icon">🔥</span><div class="prize-name">歌林20公升<br>電烤箱</div><div class="prize-badge">2 名</div></div>
+                <div class="prize-card"><span class="icon">💰</span><div class="prize-name">1000元現金獎</div><div class="prize-badge">6 名</div></div>
+                <div class="prize-card"><span class="icon">🍚</span><div class="prize-name">台製10人<br>不銹鋼電鍋</div><div class="prize-badge">2 名</div></div>
+                <div class="prize-card"><span class="icon">🌬️</span><div class="prize-name">16吋變頻<br>節能電扇</div><div class="prize-badge">2 名</div></div>
+                <div class="prize-card"><span class="icon">🍽️</span><div class="prize-name">直立式烘碗機</div><div class="prize-badge">2 名</div></div>
+                <div class="prize-card"><span class="icon">🥪</span><div class="prize-name">8公升烤箱</div><div class="prize-badge">2 名</div></div>
+                <div class="prize-card"><span class="icon">🍚</span><div class="prize-name">10人電子鍋</div><div class="prize-badge">2 名</div></div>
+            </div>
+        </div>
+
+    </div>
+
 </body>
-
 </html>
-
