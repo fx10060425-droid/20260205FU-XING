@@ -3,260 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>✨ 幸運大抽獎（左右並排版） ✨</title>
-    <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@300;500&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <title>尾牙幸運抽獎清單 ✨</title>
     <style>
+        /* 可愛風格設定 */
         :root {
             --primary-pink: #FFB7B2;
-            --soft-yellow: #FFFFD1;
+            --soft-yellow: #FFF2CC;
             --mint-green: #E2F0CB;
-            --text-color: #6d5c5c;
+            --sky-blue: #B5EAD7;
+            --text-color: #555;
             --card-bg: #ffffff;
-            --grand-gold: #FFD700;
         }
 
         body {
-            background: linear-gradient(135deg, #FFF5F5 0%, #FFF0F5 100%);
-            font-family: 'Kiwi Maru', 'Noto Sans TC', sans-serif;
+            font-family: "微軟正黑體", "Microsoft JhengHei", "Comic Sans MS", sans-serif;
+            background-color: #FFF9F2;
+            background-image: radial-gradient(#FFD1DC 15%, transparent 16%), radial-gradient(#B5EAD7 15%, transparent 16%);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
             color: var(--text-color);
             margin: 0;
             padding: 20px;
-            height: 100vh;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         header {
             text-align: center;
-            margin-bottom: 20px;
-            flex-shrink: 0;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 50px;
+            box-shadow: 0 8px 16px rgba(255, 183, 178, 0.4);
+            border: 4px solid var(--primary-pink);
         }
 
         h1 {
-            color: #FF6F61;
-            font-size: 2rem;
-            margin: 0 0 5px 0;
-            text-shadow: 2px 2px 0px #fff;
-        }
-
-        .subtitle {
-            font-size: 1rem;
-            color: #888;
             margin: 0;
+            color: #FF6F61;
+            font-size: 2.2em;
+            letter-spacing: 2px;
         }
 
-        /* 主要容器：改為 Flex 左右排版 */
-        .container {
-            display: flex;
-            gap: 20px;
-            max-width: 1400px; /* 加寬寬度以容納左右兩欄 */
-            margin: 0 auto;
-            flex-grow: 1;
-            align-items: stretch; /* 讓兩欄等高 */
-            width: 100%;
+        h1 span {
+            display: inline-block;
+            animation: bounce 2s infinite;
         }
 
-        /* 每一輪的區塊 */
-        .round-section {
-            flex: 1; /* 左右各佔 50% */
-            background-color: rgba(255, 255, 255, 0.6);
-            border: 4px dashed var(--primary-pink);
-            border-radius: 30px;
-            padding: 40px 20px 20px 20px; /* 上方留多一點給標題 */
+        .section-card {
+            background: var(--card-bg);
+            border-radius: 25px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            border: 3px dashed var(--sky-blue);
             position: relative;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto; /* 如果內容太多，區塊內可以捲動 */
-            max-height: calc(100vh - 150px); /* 限制高度，避免超出視窗 */
+            overflow: hidden;
         }
 
-        /* 捲軸美化 */
-        .round-section::-webkit-scrollbar {
-            width: 8px;
-        }
-        .round-section::-webkit-scrollbar-track {
-            background: #fff0f5; 
-            border-radius: 10px;
-        }
-        .round-section::-webkit-scrollbar-thumb {
-            background: #ffb7b2; 
-            border-radius: 10px;
-        }
-
-        .round-title {
-            background-color: var(--primary-pink);
-            color: white;
-            padding: 8px 25px;
+        .section-title {
+            text-align: center;
+            font-size: 1.5em;
+            color: #4A90E2;
+            margin-bottom: 20px;
+            background: var(--soft-yellow);
+            display: inline-block;
+            padding: 10px 30px;
             border-radius: 50px;
-            font-size: 1.3rem;
-            font-weight: bold;
-            position: absolute;
-            top: -20px;
+            position: relative;
             left: 50%;
             transform: translateX(-50%);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             white-space: nowrap;
-            z-index: 10;
         }
 
-        .round-note {
+        .note {
             text-align: center;
-            color: #ff8ba7;
-            font-weight: bold;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-            flex-shrink: 0;
+            font-size: 0.9em;
+            color: #888;
+            margin-bottom: 20px;
         }
 
-        /* 獎品網格 */
-        .grid {
+        .prize-list {
+            list-style: none;
+            padding: 0;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* 卡片稍微縮小一點以塞入更多 */
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 15px;
-            padding-bottom: 10px;
         }
 
-        .prize-card {
-            background: var(--card-bg);
+        .prize-item {
+            background: #FAFAFA;
             border-radius: 15px;
-            padding: 15px 10px;
-            box-shadow: 0 3px 10px rgba(255, 183, 178, 0.2);
-            transition: all 0.2s;
+            padding: 15px;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            border: 2px solid transparent;
-            cursor: pointer; /* 讓游標變成手指 */
-            position: relative;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-left: 8px solid var(--mint-green);
         }
 
-        .prize-card:hover {
+        .prize-item:hover {
             transform: translateY(-5px);
-            border-color: var(--mint-green);
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .prize-card:active {
-            transform: scale(0.95); /* 點擊時縮小效果 */
-        }
-
-        .icon {
-            font-size: 1.8rem;
-            margin-bottom: 5px;
+            background: #fff;
         }
 
         .prize-name {
-            font-size: 0.95rem;
             font-weight: bold;
-            margin-bottom: 8px;
-            line-height: 1.3;
+            font-size: 1.1em;
+            color: #444;
+        }
+
+        .prize-qty {
+            background: var(--primary-pink);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+            min-width: 30px;
             text-align: center;
         }
 
-        .prize-badge {
-            background-color: var(--soft-yellow);
-            color: #eda045;
-            padding: 3px 10px;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 0.8rem;
+        /* 特別強調第二輪 */
+        .round-2 .section-card {
+            border-color: var(--primary-pink);
+        }
+        .round-2 .prize-item {
+            border-left-color: var(--primary-pink);
+        }
+        .round-2 .section-title {
+            color: #FF6F61;
+            background: var(--mint-green);
         }
 
-        /* 第二輪大獎特別樣式 */
-        .grand-prize {
-            background: linear-gradient(to bottom, #fff, #fff9e6);
-            border: 2px solid var(--grand-gold);
-        }
-        
-        .grand-prize .prize-name {
-            color: #d4af37;
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
         }
 
-        .grand-prize .prize-badge {
-            background-color: var(--grand-gold);
-            color: white;
-        }
-
-        /* 手機版適配：螢幕太窄時自動變回上下排列 */
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-                height: auto;
-            }
-            .round-section {
-                max-height: none;
-                margin-bottom: 30px;
-            }
-            .round-title {
-                top: -20px;
-            }
-            body {
-                height: auto;
-            }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #aaa;
+            font-size: 0.8em;
         }
     </style>
 </head>
 <body>
 
+<div class="container">
     <header>
-        <h1>🎈 歡樂尾牙大抽獎 🎈</h1>
-        <p class="subtitle">點擊獎品卡片可查看詳情（模擬）</p>
+        <h1><span>🎉</span> 年度尾牙幸運抽獎 <span>🎁</span></h1>
     </header>
 
-    <div class="container">
-        
-        <div class="round-section">
-            <div class="round-title">🌸 第一輪：普天同慶</div>
-            <span class="round-note">📍 貼心提醒：人人有獎，請至人事室領取</span>
-            
-            <div class="grid">
-                <div class="prize-card"><span class="icon">🍲</span><div class="prize-name">HYD多功能不沾<br>1公升料理快煮鍋</div><div class="prize-badge">6 名</div></div>
-                <div class="prize-card"><span class="icon">🔋</span><div class="prize-name">5000mAh<br>口袋行動電源</div><div class="prize-badge">9 名</div></div>
-                <div class="prize-card"><span class="icon">🛋️</span><div class="prize-name">法蘭絨<br>印畫休閒毯</div><div class="prize-badge">16 名</div></div>
-                <div class="prize-card"><span class="icon">🎧</span><div class="prize-name">TWS藍芽耳機</div><div class="prize-badge">38 名</div></div>
-                <div class="prize-card"><span class="icon">🎁</span><div class="prize-name">文青盲盒</div><div class="prize-badge">1 名</div></div>
-                <div class="prize-card"><span class="icon">🛍️</span><div class="prize-name">桃園好禮</div><div class="prize-badge">1 名</div></div>
-                <div class="prize-card"><span class="icon">☕</span><div class="prize-name">露糜咖啡套裝</div><div class="prize-badge">1 名</div></div>
-                <div class="prize-card"><span class="icon">🍵</span><div class="prize-name">角板梅子康普茶</div><div class="prize-badge">1 名</div></div>
-                <div class="prize-card"><span class="icon">🍪</span><div class="prize-name">歲月好味<br>馬上開吃</div><div class="prize-badge">1 名</div></div>
-                <div class="prize-card"><span class="icon">🥜</span><div class="prize-name">堅果樂園</div><div class="prize-badge">1 名</div></div>
-                <div class="prize-card"><span class="icon">🐍</span><div class="prize-name">果菓-菓韻<br>蛇鼻禮盒</div><div class="prize-badge">1 名</div></div>
-                <div class="prize-card"><span class="icon">🍖</span><div class="prize-name">KIRI獵人食坊</div><div class="prize-badge">1 名</div></div>
-                <div class="prize-card"><span class="icon">🥤</span><div class="prize-name">歌本哈根保溫瓶</div><div class="prize-badge">53 名</div></div>
-                <div class="prize-card"><span class="icon">🛌</span><div class="prize-name">法蘭絨毯</div><div class="prize-badge">20 名</div></div>
-                <div class="prize-card"><span class="icon">💨</span><div class="prize-name">台製吹風機</div><div class="prize-badge">20 名</div></div>
-                <div class="prize-card"><span class="icon">🫖</span><div class="prize-name">不鏽鋼電茶壺</div><div class="prize-badge">20 名</div></div>
-                <div class="prize-card"><span class="icon">💡</span><div class="prize-name">護眼檯燈</div><div class="prize-badge">10 名</div></div>
-                <div class="prize-card"><span class="icon">💖</span><div class="prize-name">暖心安慰獎</div><div class="prize-badge">60 名</div></div>
-            </div>
-        </div>
-
-        <div class="round-section">
-            <div class="round-title">💎 第二輪：現場大獎</div>
-            <span class="round-note">✨ 緊張刺激！現場抽出幸運兒 ✨</span>
-
-            <div class="grid">
-                <div class="prize-card grand-prize"><span class="icon">📺</span><div class="prize-name">聲寶50吋電視</div><div class="prize-badge">1 名</div></div>
-                <div class="prize-card grand-prize"><span class="icon">🧹</span><div class="prize-name">奇美手持多功能<br>很有力吸塵器</div><div class="prize-badge">1 名</div></div>
-                <div class="prize-card grand-prize"><span class="icon">🍽️</span><div class="prize-name">紫外線<br>三層烘碗機</div><div class="prize-badge">1 名</div></div>
-                <div class="prize-card grand-prize"><span class="icon">☕</span><div class="prize-name">Balzano<br>全自動磨豆咖啡機</div><div class="prize-badge">1 名</div></div>
-                
-                <div class="prize-card"><span class="icon">🍳</span><div class="prize-name">鍋寶萬用<br>不沾深炒鍋</div><div class="prize-badge">3 名</div></div>
-                <div class="prize-card"><span class="icon">💆</span><div class="prize-name">富士電通<br>急速震動筋膜槍</div><div class="prize-badge">3 名</div></div>
-                <div class="prize-card"><span class="icon">🔥</span><div class="prize-name">歌林10公升<br>雙旋鈕電烤箱</div><div class="prize-badge">2 名</div></div>
-                <div class="prize-card"><span class="icon">🔥</span><div class="prize-name">歌林20公升<br>電烤箱</div><div class="prize-badge">2 名</div></div>
-                <div class="prize-card"><span class="icon">💰</span><div class="prize-name">1000元現金獎</div><div class="prize-badge">6 名</div></div>
-                <div class="prize-card"><span class="icon">🍚</span><div class="prize-name">台製10人<br>不銹鋼電鍋</div><div class="prize-badge">2 名</div></div>
-                <div class="prize-card"><span class="icon">🌬️</span><div class="prize-name">16吋變頻<br>節能電扇</div><div class="prize-badge">2 名</div></div>
-                <div class="prize-card"><span class="icon">🍽️</span><div class="prize-name">直立式烘碗機</div><div class="prize-badge">2 名</div></div>
-                <div class="prize-card"><span class="icon">🥪</span><div class="prize-name">8公升烤箱</div><div class="prize-badge">2 名</div></div>
-                <div class="prize-card"><span class="icon">🍚</span><div class="prize-name">10人電子鍋</div><div class="prize-badge">2 名</div></div>
-            </div>
-        </div>
-
+    <div class="section-card round-1">
+        <div class="section-title">第一輪：普天通慶歡樂獎</div>
+        <p class="note">📍 請中獎人至人事室領取</p>
+        <ul class="prize-list">
+            <li class="prize-item"><span class="prize-name">HYD多功能不沾1公升料理快煮鍋</span><span class="prize-qty">6名</span></li>
+            <li class="prize-item"><span class="prize-name">5000mAh口袋行動電源</span><span class="prize-qty">9名</span></li>
+            <li class="prize-item"><span class="prize-name">法蘭絨印畫休閒毯</span><span class="prize-qty">16名</span></li>
+            <li class="prize-item"><span class="prize-name">TWS藍芽耳機</span><span class="prize-qty">38名</span></li>
+            <li class="prize-item"><span class="prize-name">文青盲盒</span><span class="prize-qty">1名</span></li>
+            <li class="prize-item"><span class="prize-name">桃園好禮</span><span class="prize-qty">1名</span></li>
+            <li class="prize-item"><span class="prize-name">露糜咖啡套裝</span><span class="prize-qty">1名</span></li>
+            <li class="prize-item"><span class="prize-name">角板梅子康普茶</span><span class="prize-qty">1名</span></li>
+            <li class="prize-item"><span class="prize-name">歲月好味．馬上開吃</span><span class="prize-qty">1名</span></li>
+            <li class="prize-item"><span class="prize-name">堅果樂園</span><span class="prize-qty">1名</span></li>
+            <li class="prize-item"><span class="prize-name">果菓-菓韻蛇鼻禮盒</span><span class="prize-qty">1名</span></li>
+            <li class="prize-item"><span class="prize-name">KIRI獵人食坊</span><span class="prize-qty">1名</span></li>
+            <li class="prize-item"><span class="prize-name">法蘭絨毯</span><span class="prize-qty">20名</span></li>
+            <li class="prize-item"><span class="prize-name">台製吹風機</span><span class="prize-qty">20名</span></li>
+            <li class="prize-item"><span class="prize-name">不鏽鋼電茶壺</span><span class="prize-qty">20名</span></li>
+            <li class="prize-item"><span class="prize-name">護眼檯燈</span><span class="prize-qty">10名</span></li>
+            <li class="prize-item"><span class="prize-name">37公分電烤盤</span><span class="prize-qty">1名</span></li>
+            <li class="prize-item"><span class="prize-name">耳罩式耳機</span><span class="prize-qty">2名</span></li>
+        </ul>
     </div>
+
+    <div class="section-card round-2">
+        <div class="section-title">第二輪：現場大獎</div>
+        <p class="note">📍 現場抽出幸運得主！</p>
+        <ul class="prize-list">
+            <li class="prize-item"><span class="prize-name">聲寶50吋電視</span><span class="prize-qty">1名</span></li>
+            <li class="prize-item"><span class="prize-name">奇美手持多功能很有力吸塵器</span><span class="prize-qty">1名</span></li>
+            <li class="prize-item"><span class="prize-name">紫外線三層烘碗機</span><span class="prize-qty">1名</span></li>
+            <li class="prize-item"><span class="prize-name">Balzano全自動磨豆咖啡機</span><span class="prize-qty">1名</span></li>
+            <li class="prize-item"><span class="prize-name">鍋寶萬用不沾深炒鍋</span><span class="prize-qty">3名</span></li>
+            <li class="prize-item"><span class="prize-name">富士電通急速震動筋膜槍</span><span class="prize-qty">3名</span></li>
+            <li class="prize-item"><span class="prize-name">歌林10公升雙旋鈕電烤箱</span><span class="prize-qty">2名</span></li>
+            <li class="prize-item"><span class="prize-name">歌林20公升電烤箱</span><span class="prize-qty">2名</span></li>
+            <li class="prize-item"><span class="prize-name">台製10人不銹鋼電鍋</span><span class="prize-qty">2名</span></li>
+            <li class="prize-item"><span class="prize-name">16吋變頻節能電扇</span><span class="prize-qty">2名</span></li>
+            <li class="prize-item"><span class="prize-name">直立式烘碗機</span><span class="prize-qty">2名</span></li>
+            <li class="prize-item"><span class="prize-name">8公升烤箱</span><span class="prize-qty">2名</span></li>
+            <li class="prize-item"><span class="prize-name">10人電子鍋</span><span class="prize-qty">2名</span></li>
+            <li class="prize-item"><span class="prize-name">衛生所盲盒</span><span class="prize-qty">1名</span></li>
+            <li class="prize-item"><span class="prize-name">南僑水晶禮盒</span><span class="prize-qty">1名</span></li>
+            <li class="prize-item"><span class="prize-name">清淨海禮盒</span><span class="prize-qty">5名</span></li>
+            <li class="prize-item"><span class="prize-name">區長提供-3000元現金紅包</span><span class="prize-qty">1名</span></li>
+            <li class="prize-item"><span class="prize-name">區長提供-2000元現金紅包</span><span class="prize-qty">1名</span></li>
+            <li class="prize-item"><span class="prize-name">區長提供-1000元現金紅包</span><span class="prize-qty">10名</span></li>
+            <li class="prize-item"><span class="prize-name">1000元現金紅包</span><span class="prize-qty">19名</span></li>
+        </ul>
+    </div>
+
+    <footer>
+        <p>祝大家中大獎！✨</p>
+    </footer>
+</div>
 
 </body>
 </html>
