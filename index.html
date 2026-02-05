@@ -7,10 +7,10 @@
     <style>
         /* 吉伊卡哇風格配色 */
         :root {
-            --chiikawa-pink: #FFDBE8;
-            --hachiware-blue: #D6EBF7;
-            --usagi-yellow: #FFF6C4;
-            --text-color: #6B5B55; /* 溫暖的深棕色文字 */
+            --chiikawa-pink: #FFDBE8;   /* 吉伊卡哇粉 */
+            --hachiware-blue: #D6EBF7;  /* 小八貓藍 */
+            --usagi-yellow: #FFF6C4;    /* 烏薩奇黃 */
+            --text-color: #6B5B55;      /* 溫暖深棕色 */
             --white: #FFFFFF;
             --accent-pink: #FF9EAC;
         }
@@ -18,6 +18,7 @@
         body {
             font-family: "微軟正黑體", "Microsoft JhengHei", "Mochiy Pop One", sans-serif;
             background-color: #FFF5F7;
+            /* 背景加上可愛的小點點裝飾 */
             background-image: 
                 radial-gradient(var(--chiikawa-pink) 20%, transparent 20%),
                 radial-gradient(var(--hachiware-blue) 20%, transparent 20%);
@@ -33,7 +34,7 @@
             margin: 0 auto;
         }
 
-        /* 標題區塊 */
+        /* --- 標題區塊 --- */
         header {
             text-align: center;
             margin-bottom: 50px;
@@ -47,11 +48,12 @@
             border-radius: 50px;
             border: 5px solid var(--chiikawa-pink);
             color: var(--accent-pink);
-            font-size: 2.5em;
-            box-shadow: 0 10px 0 #F2C6D6; /* 立體陰影 */
+            font-size: 2.2em;
+            box-shadow: 0 10px 0 #F2C6D6; /* 立體陰影效果 */
             position: relative;
         }
 
+        /* 標題旁的小裝飾 */
         h1::after {
             content: "✨";
             position: absolute;
@@ -62,7 +64,7 @@
         }
 
         h1::before {
-            content: "討伐任務：";
+            content: "討伐任務："; /* 模仿動畫中的討伐任務字樣 */
             display: block;
             font-size: 0.4em;
             color: #aaa;
@@ -70,7 +72,6 @@
             letter-spacing: 2px;
         }
 
-        /* 裝飾用角色頭像 placeholder */
         .character-icon {
             font-size: 3em;
             display: block;
@@ -78,7 +79,7 @@
             animation: bounce 2s infinite;
         }
 
-        /* 獎項卡片區塊 */
+        /* --- 獎項卡片共用樣式 --- */
         .section-card {
             background: var(--white);
             border-radius: 30px;
@@ -88,102 +89,104 @@
             box-shadow: 0 15px 30px rgba(107, 91, 85, 0.1);
         }
 
-        /* 第一輪：小八貓風格（藍色） */
+        .section-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            padding: 12px 35px;
+            border-radius: 30px;
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border: 3px solid #fff;
+        }
+
+        .note {
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 30px;
+            color: #888;
+            font-size: 0.95em;
+        }
+
+        /* --- 第一輪：小八貓風格（藍色） --- */
         .round-1 {
             border: 4px solid var(--hachiware-blue);
         }
         .round-1 .section-title {
             background: var(--hachiware-blue);
-            color: #5D8AA8;
+            color: #4A90E2;
         }
+        /* 列表項目底色 */
         .round-1 .prize-item {
             background: #F0F8FF;
+            border-left: 6px solid #89CFF0;
         }
+        /* 數量標籤底色 */
         .round-1 .prize-qty {
             background: #89CFF0;
         }
 
-        /* 第二輪：烏薩奇風格（黃色） */
+        /* --- 第二輪：烏薩奇風格（黃色） --- */
         .round-2 {
             border: 4px solid var(--usagi-yellow);
         }
         .round-2 .section-title {
             background: var(--usagi-yellow);
-            color: #CCA000;
+            color: #D4AC0D;
         }
         .round-2 .prize-item {
             background: #FFFEF0;
+            border-left: 6px solid #F4D03F;
         }
         .round-2 .prize-qty {
             background: #F4D03F;
             color: #6B5B55;
         }
 
-        .section-title {
-            font-size: 1.6em;
-            font-weight: bold;
-            padding: 15px 40px;
-            border-radius: 30px;
-            position: absolute;
-            top: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            white-space: nowrap;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.05);
-        }
-
-        .note {
-            text-align: center;
-            margin-top: 20px;
-            margin-bottom: 30px;
-            color: #999;
-            font-size: 0.95em;
-        }
-
-        /* 列表樣式 */
+        /* --- 列表排版 --- */
         .prize-list {
             list-style: none;
             padding: 0;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* RWD 自動排版 */
-            gap: 20px;
+            /* RWD: 手機單欄，電腦雙欄 */
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            gap: 15px;
         }
 
         .prize-item {
-            border-radius: 20px;
+            border-radius: 15px;
             padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            transition: transform 0.2s;
         }
 
         .prize-item:hover {
-            transform: scale(1.03) rotate(-1deg);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transform: translateY(-3px); /* 滑鼠移過去會浮起來 */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
         }
 
         .prize-name {
             font-weight: bold;
-            font-size: 1.1em;
-            z-index: 1;
+            font-size: 1.05em;
         }
 
         .prize-qty {
-            padding: 6px 15px;
-            border-radius: 50px;
+            padding: 4px 12px;
+            border-radius: 20px;
             font-weight: bold;
             font-size: 0.9em;
             color: var(--white);
-            min-width: 40px;
+            min-width: 35px;
             text-align: center;
-            z-index: 1;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            white-space: nowrap;
         }
 
-        /* 動畫 */
+        /* --- 動畫 --- */
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
@@ -193,7 +196,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* 頁尾 */
         footer {
             text-align: center;
             margin-top: 50px;
@@ -225,7 +227,7 @@
             <li class="prize-item"><span class="prize-name">法蘭絨印畫休閒毯</span><span class="prize-qty">16名</span></li>
             <li class="prize-item"><span class="prize-name">TWS藍芽耳機</span><span class="prize-qty">38名</span></li>
             <li class="prize-item"><span class="prize-name">文青盲盒</span><span class="prize-qty">1名</span></li>
-            <li class="prize-item"><span class="prize-name">桃園好禮</span><span class="prize-qty">1名</span></li>
+            <li class="prize-item"><span class="prize-name">MSI耳罩式耳機</span><span class="prize-qty">1名</span></li>
             <li class="prize-item"><span class="prize-name">露糜咖啡套裝</span><span class="prize-qty">1名</span></li>
             <li class="prize-item"><span class="prize-name">角板梅子康普茶</span><span class="prize-qty">1名</span></li>
             <li class="prize-item"><span class="prize-name">歲月好味．馬上開吃</span><span class="prize-qty">1名</span></li>
